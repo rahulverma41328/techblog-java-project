@@ -4,16 +4,16 @@ import java.sql.Timestamp;
 
 public class Users {
     private int id;
-    private String name;
+    private String username;
     private String email;
     private String password;
     private String gender;
     private String about;
     private Timestamp rdate;
 
-    public Users(int id, String name, String email, String password, String gender, String about, Timestamp rdate) {
+    public Users(int id, String username, String email, String password, String gender, String about, Timestamp rdate) {
         this.id = id;
-        this.name = name;
+        this.username = username;
         this.email = email;
         this.password = password;
         this.gender = gender;
@@ -21,8 +21,8 @@ public class Users {
         this.rdate = rdate;
     }
 
-    public Users(String name, String email, String password, String gender, String about, Timestamp rdate) {
-        this.name = name;
+    public Users(String username, String email, String password, String gender, String about) {
+        this.username = username;
         this.email = email;
         this.password = password;
         this.gender = gender;
@@ -32,11 +32,11 @@ public class Users {
 
     public Users(){};
     public String getName() {
-        return name;
+        return username;
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.username = name;
     }
 
     public String getEmail() {

@@ -14,18 +14,18 @@ public class UserDao {
 
     // method to insert user to database;
 
-    public boolean  saveUser(Users users){
+    public boolean  saveUser(Users Users){
         boolean f= false;
         try {
 
-            String query = "insert into users(name,email,password,gender,about) values(?,?,?,?,?)";
+            String query = "insert into Users(username,email,password,gender,about) values(?,?,?,?,?)";
             PreparedStatement pstmt = this.con.prepareStatement(query);
 
-            pstmt.setString(1,users.getName());
-            pstmt.setString(2,users.getEmail());
-            pstmt.setString(3,users.getPassword());
-            pstmt.setString(4,users.getGender());
-            pstmt.setString(5,users.getAbout());
+            pstmt.setString(1,Users.getName());
+            pstmt.setString(2,Users.getEmail());
+            pstmt.setString(3,Users.getPassword());
+            pstmt.setString(4,Users.getGender());
+            pstmt.setString(5,Users.getAbout());
 
             pstmt.executeUpdate();
             f=true;
@@ -36,4 +36,5 @@ public class UserDao {
         }
         return f;
     }
+
 }
