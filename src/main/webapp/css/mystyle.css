@@ -3,4 +3,6 @@ body{
 }
 .primary-background{
   background:#2196f3!important;
+  clip-path: polygon(30% 0%,70% 0%,100% 0, 100% 91%, 63% 100%, 22% 91% , 0  99% 0 0);
+
 }

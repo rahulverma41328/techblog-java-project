@@ -5,6 +5,7 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link href="css/mystyle.css" rel="stylesheet" type="text/css"/>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     </head>
 
     <body>
@@ -57,9 +58,12 @@
                                     <label for="floatingTextarea2">tell about yourself</label>
                                 </div>
                                 <br>
-
+                                <div class="container text-center" id="loader" style="display:none;">
+                                   <span class= "fa fa-refresh fa-spin fa-4x"></span>
+                                   <h4>Please wait..</h4>
+                                </div>
                                 <br>
-                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <button type="submit" id="submit-btn" class="btn btn-primary">Submit</button>
                             </form>
                         </div>
                     </div>
@@ -75,6 +79,9 @@
                  $('#reg-form').on('submit', function(event){
          event.preventDefault();
                  let form = new FormData(this);
+
+                 $('#submit-btn').hide();
+                 $('#loader').show();
                  // send register servlet
                  $.ajax({
                  url: "register",
@@ -82,10 +89,24 @@
                          data: form,
                          success: function(data, textStatus, jqXHR){
                          console.log(data)
+                           $('#submit-btn').show();
+                           $('#loader').hide();
+
+                           if(data.trim()==='done'){
+                              Swal.fire("Success..").then((value) =>{
+                                 window.location = "login.jsp"
+                              });
+                           }
+                           else{
+                             Swal.fire("something went wrong..");
+                           }
 
                          },
                          error: function(jqXHR, textStatus, errorThrown){
                          console.log(jqXHR)
+                            Swal.fire("something went wrong..");
+                            $('#submit-btn').show();
+                            $('#loader').hide();
                          },
                  processData:false,
                  contentType:false

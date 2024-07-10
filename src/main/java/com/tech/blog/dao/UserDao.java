@@ -4,6 +4,7 @@ import com.tech.blog.entities.Users;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 public class UserDao {
     private Connection con;
@@ -35,6 +36,42 @@ public class UserDao {
             e.printStackTrace();
         }
         return f;
+    }
+
+    //get user by useremail and password
+
+    public Users getUserByEmailAndPassword(String email,String password){
+        Users users = null;
+
+        try {
+            String query = "select * from Users where email =? and password=?";
+            PreparedStatement pstmt = con.prepareStatement(query);
+
+            pstmt.setString(1,email);
+            pstmt.setString(2,password);
+
+            ResultSet set = pstmt.executeQuery();
+
+            if (set.next()){
+                users = new Users();
+                // data from db
+                String name = set.getString("username");
+                // set to user object
+                users.setName(name);
+                users.setId(set.getInt("id"));
+                users.setAbout(set.getString("about"));
+                users.setGender(set.getString("gender"));
+                users.setEmail(set.getString("email"));
+                users.setPassword(set.getString("password"));
+                users.setRdate(set.getTimestamp("rdate"));
+                users.setProfile(set.getString("profile"));
+
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return users;
     }
 
 }

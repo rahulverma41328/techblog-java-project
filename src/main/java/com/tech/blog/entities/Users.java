@@ -10,8 +10,9 @@ public class Users {
     private String gender;
     private String about;
     private Timestamp rdate;
+    private String profile;
 
-    public Users(int id, String username, String email, String password, String gender, String about, Timestamp rdate) {
+    public Users(int id, String username, String email, String password, String gender, String about, Timestamp rdate,String profile) {
         this.id = id;
         this.username = username;
         this.email = email;
@@ -19,15 +20,17 @@ public class Users {
         this.gender = gender;
         this.about = about;
         this.rdate = rdate;
+        this.profile = profile;
     }
 
-    public Users(String username, String email, String password, String gender, String about) {
+    public Users(String username, String email, String password, String gender, String about,String profile) {
         this.username = username;
         this.email = email;
         this.password = password;
         this.gender = gender;
         this.about = about;
         this.rdate = rdate;
+        this.profile = profile;
     }
 
     public Users(){};
@@ -85,5 +88,13 @@ public class Users {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getProfile() {
+        return profile;
+    }
+
+    public void setProfile(String profile) {
+        this.profile = profile;
     }
 }

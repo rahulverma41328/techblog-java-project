@@ -19,7 +19,6 @@ public class RegisterServlet extends HttpServlet{
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         PrintWriter out = resp.getWriter();
-        out.println("<h1>rahul</h1>");
         String check = req.getParameter("check_box");
 
         if (check==null){
@@ -33,7 +32,7 @@ public class RegisterServlet extends HttpServlet{
             String gender = req.getParameter("gender");
             String about = req.getParameter("about");
 
-            Users users = new Users(name,email,password,gender,about);
+            Users users = new Users(name,email,password,gender,about,"default.png");
             UserDao dao = new UserDao(ConnectionProvider.getCon());
 
            if (dao.saveUser(users)){
