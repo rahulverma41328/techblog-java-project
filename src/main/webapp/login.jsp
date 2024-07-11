@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"%>
+<%@ page import="com.tech.blog.entities.Message"%>
 <html>
    <head>
       <title>Login Page</title>
@@ -13,9 +15,21 @@
             <div class="row">
                <div class="col-md-4 offset-md-4">
                   <div class="card">
-                     <div class="card-header">
+                     <div class="card-header text-center">
                         <p>Login here</p>
                      </div>
+
+                     <%
+                       Message m = (Message)session.getAttribute("msg");
+                       if(m!=null){
+                     %>
+                     <div class="alert <%= m.getCssClass()%>" role="alert">
+                          <%= m.getContent() %>
+                     </div>
+                     <%
+                       session.removeAttribute("msg");
+                       }
+                     %>
 
                      <div class="card-body">
                         <form action="login" method='POST'>

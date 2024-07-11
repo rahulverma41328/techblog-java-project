@@ -25,6 +25,120 @@
    </head>
 
    <body>
-     <%= users.getEmail() %>
+      <!--navbar -->
+
+      <nav class="navbar navbar-expand-lg navbar-dark primary-background">
+          <div class="container-fluid">
+              <a class="navbar-brand" href="#">Tech Blog</a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                  <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                      <li class="nav-item">
+                          <a class="nav-link active" aria-current="page" href="index.jsp">Home</a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link" href="#">Link</a>
+                      </li>
+                      <li class="nav-item dropdown">
+                          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                              Categories
+                          </a>
+                          <ul class="dropdown-menu">
+                              <li><a class="dropdown-item" href="#">Project</a></li>
+                              <li><a class="dropdown-item" href="#">code</a></li>
+                              <li><hr class="dropdown-divider"></li>
+                              <li><a class="dropdown-item" href="#">other</a></li>
+                          </ul>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link" href="contact.jsp">Contact</a>
+                      </li>
+
+
+                  </ul>
+
+                  <ul class="navbar-nav mr-right">
+                       <li class="nav-item">
+                          <a class="nav-link"href="#!" data-bs-toggle="modal" data-bs-target="#profile-modal"><span class="fa fa-user-circle me-2"></span><%= users.getName() %></a>
+                       </li>
+
+                       <li class="nav-item">
+                             <a class="nav-link"href="logoutServlet"><span class="fa fa-user-plus me-2"></span>Logout</a>
+                       </li>
+                  </ul>
+              </div>
+          </div>
+      </nav
+
+      <!-- navbar bar -->
+
+      <!-- modal start -->
+
+
+        <!-- Modal -->
+        <div class="modal fade" id="profile-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header primary-background text-white text-center">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">TechBlog</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <div class="container text-center">
+
+                  <img src="pics/<%= users.getProfile() %> " style="border-radius: 50%; max-width:150px;"></img>
+
+                  <h5 class="modal-title fs-5 mt-3" id="exampleModalLabel"><%= users.getName() %></h5>
+
+                  <!-- details -->
+
+                  <table class="table">
+                    <tbody>
+                       <tr>
+                         <th scope="row"> ID :</th>
+                         <td> <%= users.getId() %> </td>
+                       </tr>
+
+                       <tr>
+                          <th scope="row"> Email :</th>
+                          <td> <%= users.getEmail() %> </td>
+                       </tr>
+
+                       <tr>
+                          <th scope="row"> Gender :</th>
+                          <td> <%= users.getGender() %> </td>
+                       </tr>
+
+                       <tr>
+                          <th scope="row"> About :</th>
+                          <td> <%= users.getAbout() %> </td>
+                       </tr>
+
+                       <tr>
+                            <th scope="row"> Register On :</th>
+                            <td> <%= users.getRdate() %> </td>
+                       </tr>
+                    </tbody>
+                 </table>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+
+
+      <!-- modal end -->
+
+       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+       <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+       <script src="js/myjs.js" type="text/javascript"></script>
+
    </body>
 </html>
