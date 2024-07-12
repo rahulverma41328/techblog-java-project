@@ -93,7 +93,7 @@
                   <h5 class="modal-title fs-5 mt-3" id="exampleModalLabel"><%= users.getName() %></h5>
 
                   <!-- details -->
-
+                  <div id="profile-details">
                   <table class="table">
                     <tbody>
                        <tr>
@@ -122,11 +122,64 @@
                        </tr>
                     </tbody>
                  </table>
+                 </div>
+                 <div id="profile-edit" style="display:none;">
+                   <h3 class="mt-2">Please edit carefully</h3>
+                   <form action= "EditServlet" method="post" enctype="multipart/form-data">
+                     <table class="table">
+                       <tr>
+                         <td>ID :</td>
+                         <td><%= users.getId() %></td>
+                       </tr>
+
+                       <tr>
+                         <td>Email :</td>
+                         <td><input type="email" class="form-control" name="user_email" value="<%= users.getEmail() %>"></td>
+                       </tr>
+
+                       <tr>
+                        <td>Name :</td>
+                        <td><input type="text" class="form-control" name="user_name" value="<%= users.getName()%>"></td>
+                       </tr>
+
+                       <tr>
+                        <td>Password :</td>
+                        <td><input type"password" class="form-control" name="user_password" value="<%= users.getPassword()%>"></td>
+                       </tr>
+
+                        <tr>
+                          <td>ID :</td>
+                          <td><%= users.getGender() %></td>
+                        </tr>
+
+                        <tr>
+                           <td>Password :</td>
+                           <td>
+                           <textarea class="form-control" rows="3" name="user_about">
+                               <%= users.getAbout()%>
+                           </textarea>
+                           </td>
+                        </tr>
+
+                        <tr>
+                           <td>New Profile:</td>
+                           <td>
+                             <input type="file" name="image" class="form-control">
+                           </td>
+                        </tr>
+                     </table>
+
+                     <div class="container">
+                       <button type="submit" class="btn btn-outline-primary">Save</button>
+                     </div>
+                   </form>
+
+                 </div>
                 </div>
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="button" id="edit-profile-btn" class="btn btn-primary">Edit</button>
               </div>
             </div>
           </div>
@@ -139,6 +192,31 @@
        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
        <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
        <script src="js/myjs.js" type="text/javascript"></script>
+
+       <script>
+         $(document).ready(function() {
+
+            let editStatus = false;
+
+            $('#edit-profile-btn').click(function() {
+
+              if(editStatus == false){
+
+                 $("#profile-details").hide()
+                 $("#profile-edit").show()
+                 $(this).text("Back")
+                 editStatus = true;
+              }
+              else{
+                 $("#profile-details").show()
+                 $("#profile-edit").hide()
+                 $(this).text("Edit");
+                 editStatus = false;
+              }
+
+            });
+           });
+       </script>
 
    </body>
 </html>

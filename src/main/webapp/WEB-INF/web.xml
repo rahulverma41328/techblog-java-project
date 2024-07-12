@@ -42,4 +42,15 @@
   </servlet-mapping>
 
 
+<!--  edit servlet-->
+
+  <servlet>
+    <servlet-name>EditServlet</servlet-name>
+    <servlet-class>com.tech.blog.servlets.EditServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>EditServlet</servlet-name>
+    <url-pattern>/EditServlet</url-pattern>
+  </servlet-mapping>
 </web-app>
