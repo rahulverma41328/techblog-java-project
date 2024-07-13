@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"%>
 <%@ page import="com.tech.blog.entities.Users"%>
+<%@ page import="com.tech.blog.entities.Message"%>
 <%@ page errorPage="error_page.jsp"%>
 
 <%
@@ -70,7 +71,19 @@
                   </ul>
               </div>
           </div>
-      </nav
+      </nav>
+
+       <%
+          Message m = (Message)session.getAttribute("msg");
+          if(m!=null){
+          %>
+          <div class="alert <%= m.getCssClass()%>" role="alert">
+          <%= m.getContent() %>
+          </div>
+          <%
+            session.removeAttribute("msg");
+          }
+       %>
 
       <!-- navbar bar -->
 
@@ -88,7 +101,7 @@
               <div class="modal-body">
                 <div class="container text-center">
 
-                  <img src="pics/<%= users.getProfile() %> " style="border-radius: 50%; max-width:150px;"></img>
+                  <img src="pics/<%=users.getProfile() %> " style="border-radius: 50%; max-width:150px;"></img>
 
                   <h5 class="modal-title fs-5 mt-3" id="exampleModalLabel"><%= users.getName() %></h5>
 

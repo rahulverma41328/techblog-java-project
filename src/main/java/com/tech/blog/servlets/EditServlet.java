@@ -1,12 +1,15 @@
 package com.tech.blog.servlets;
 
 import com.tech.blog.dao.UserDao;
+import com.tech.blog.entities.Message;
 import com.tech.blog.entities.Users;
 import com.tech.blog.helper.ConnectionProvider;
+import com.tech.blog.helper.Helper;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.*;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -38,6 +41,7 @@ public class EditServlet extends HttpServlet {
         Users.setName(userName);
         Users.setAbout(userAbout);
         Users.setPassword(userPassword);
+        String oldFile = Users.getProfile();
         Users.setProfile(imageName);
 
         // update database...
@@ -47,13 +51,34 @@ public class EditServlet extends HttpServlet {
         boolean data = dao.updateUser(Users);
         try {
             PrintWriter out = resp.getWriter();
+            out.println(Users.getProfile());
 
             if (data == true){
                 out.println("updated to db");
+
+                String path = req.getServletContext().getRealPath("/") + "pics"+ File.separator+Users.getProfile();
+                String oldPath = req.getServletContext().getRealPath("/")+"pics"+File.separator+oldFile;
+
+                if (!oldPath.equals("default.png")){
+                    Helper.deleteFile(oldPath);
+                }
+                if (Helper.saveFile(part.getInputStream(),path)){
+                     //   out.println("profile photo updated...");
+                    Message m = new Message("profile photo updated","success","alert-success");
+                    s.setAttribute("msg",m);
+                }
+                else {
+                    //out.println("profile not updated...");
+                    Message m = new Message("something went wrong...","error","alert-danger");
+                    s.setAttribute("msg",m);
+                }
             }
             else {
-                out.println("not updated..");
+                //out.println("not updated..");
+                Message m = new Message("something went wrong..","error","alert-danger");
+                s.setAttribute("msg",m);
             }
+            resp.sendRedirect("profile.jsp");
         }catch (Exception e){
             e.printStackTrace();
         }
