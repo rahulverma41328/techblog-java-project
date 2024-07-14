@@ -57,6 +57,10 @@
                           <a class="nav-link" href="contact.jsp">Contact</a>
                       </li>
 
+                      <li class="nav-item">
+                         <a class="nav-link" data-bs-toggle="modal" data-bs-target="#add-post-modal" href="#!">Post</a>
+                      </li>
+
 
                   </ul>
 
@@ -201,6 +205,45 @@
 
 
       <!-- modal end -->
+
+      <!-- post modal -->
+
+      <!-- Modal -->
+      <div class="modal fade" id="add-post-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">Provide the post details</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+              <form action="AddPostServlet" method="post">
+                 <div class="form-group">
+                    <input type="text" placeholder="Enter post title" class="form-control"></input>
+                 </div>
+
+                 <div class="form-group">
+                    <textarea class="form-control mt-3" style"height:250px;" placeholder="Enter the post content"></textarea>
+                 </div
+
+                 <div class="form-group">
+                    <textarea class="form-control mt-3" style"height:250px;" placeholder="Enter the post code"></textarea>
+                 </div>
+
+                 <div class="form-group">
+                    <input class="form-control" type="file"></input>
+                 </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- post modal end -->
 
        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
        <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
