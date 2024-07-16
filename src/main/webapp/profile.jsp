@@ -2,6 +2,10 @@
 <%@ page import="com.tech.blog.entities.Users"%>
 <%@ page import="com.tech.blog.entities.Message"%>
 <%@ page errorPage="error_page.jsp"%>
+<%@ page import="com.tech.blog.dao.PostDao"%>
+<%@ page import="com.tech.blog.helper.ConnectionProvider"%>
+<%@ page import="com.tech.blog.entities.Category"%>
+<%@page import="java.util.ArrayList" %>
 
 <%
   Users users = (Users)session.getAttribute("currentUser");
@@ -218,28 +222,50 @@
             </div>
             <div class="modal-body">
 
-              <form action="AddPostServlet" method="post">
-                 <div class="form-group">
-                    <input type="text" placeholder="Enter post title" class="form-control"></input>
+              <form action="AddPostServlet" method="post" id="add-post-form">
+                 <div class = "form-group">
+                   <select class="form-control">
+                    <option selected disabled>---select category---</option>
+                    <%
+                      PostDao postD = new PostDao(ConnectionProvider.getCon());
+                      ArrayList<Category> list = postD.getAllCategories();
+                      for(Category c:list){
+
+                    %>
+                    <option value="<%= c.getCid()%>"><%= c.getName()%></option>
+
+                    <%
+                      }
+                    %>
+
+                  </select>
+                 </div>
+                 <div class="form-group mt-3">
+                    <input name="pTitle" type="text" placeholder="Enter post title" class="form-control"></input>
                  </div>
 
-                 <div class="form-group">
-                    <textarea class="form-control mt-3" style"height:250px;" placeholder="Enter the post content"></textarea>
-                 </div
-
-                 <div class="form-group">
-                    <textarea class="form-control mt-3" style"height:250px;" placeholder="Enter the post code"></textarea>
+                 <div class="form-group mt-3">
+                    <textarea name="pContent" type="text" placeholder="Enter your content" class="form-control"></textarea>
                  </div>
 
-                 <div class="form-group">
-                    <input class="form-control" type="file"></input>
+                 <div class="form-group mt-3">
+                    <textarea name="pCode" type="text" placeholder="Enter your program (if any)" class="form-control"></textarea>
                  </div>
+
+                 <div class="form-group mt-3">
+                    <label>select your pic</label>
+                    <br>
+                    <input type="file" name="pic"></input>
+                 </div>
+
+                 <div class="container text-center mt-3">
+
+                     <button type="submit" class="btn btn-outline-primary">Post</button>
+                 </div>
+
               </form>
             </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
+
           </div>
         </div>
       </div>
@@ -273,6 +299,44 @@
             });
            });
        </script>
+
+       <!-- now add post js-->
+
+       <script>
+
+          $(document).ready(function(e){
+
+             $("#add-post-form").on("submit",function(event){
+
+               // this code gets called when form is submit
+               event.preventDefault();
+
+               console.log("you have clicked on submit");
+
+
+
+               let form = new FormData(this);
+
+               $.ajax({
+
+                 url:"AddPostServlet",
+                 type: "POST",
+                 success : function(data,textStatus,jqXHR){
+                     console.log(data);
+                    //success
+                 },
+                 error: function(jqXHR,textStatus,errorThrown){
+                  // error
+                 },
+
+                 processData:false,
+                 contenttype:false
+               })
+
+             })
+          })
+       </script>
+
 
    </body>
 </html>
