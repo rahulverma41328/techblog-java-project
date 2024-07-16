@@ -224,7 +224,7 @@
 
               <form action="AddPostServlet" method="post" id="add-post-form">
                  <div class = "form-group">
-                   <select class="form-control">
+                   <select class="form-control" name="cid">
                     <option selected disabled>---select category---</option>
                     <%
                       PostDao postD = new PostDao(ConnectionProvider.getCon());
@@ -274,6 +274,7 @@
        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
        <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
        <script src="js/myjs.js" type="text/javascript"></script>
+       <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
        <script>
          $(document).ready(function() {
@@ -321,16 +322,19 @@
 
                  url:"AddPostServlet",
                  type: "POST",
+                 data: form,
                  success : function(data,textStatus,jqXHR){
                      console.log(data);
-                    //success
+                    if(data==="done"){
+                       Swal.fire("Post Uploaded...");
+                    }
                  },
                  error: function(jqXHR,textStatus,errorThrown){
                   // error
                  },
 
                  processData:false,
-                 contenttype:false
+                 contentType:false
                })
 
              })

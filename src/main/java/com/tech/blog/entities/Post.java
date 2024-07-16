@@ -10,28 +10,31 @@ public class Post {
     private String ppic;
     private Timestamp pdate;
     private int cat;
+    private int userId;
 
     public Post(){
 
     }
 
-    public Post(int pid, String ptitle, String pcontent, String pcode, String ppic, Timestamp pdate, int cat) {
+    public Post(int pid, String ptitle, String pcontent, String pcode, String ppic, Timestamp pdate, int cat,int userId) {
         this.pid = pid;
         this.ptitle = ptitle;
         this.pcontent = pcontent;
         this.pcode = pcode;
         this.ppic = ppic;
         this.pdate = pdate;
+        this.userId = userId;
         this.cat = cat;
     }
 
-    public Post( String ptitle, String pcontent, String pcode, String ppic, Timestamp pdate, int cat) {
+    public Post( String ptitle, String pcontent, String pcode, String ppic, Timestamp pdate, int cat,int userId) {
         this.pcontent = pcontent;
         this.ptitle = ptitle;
         this.pcode = pcode;
         this.ppic = ppic;
         this.pdate = pdate;
         this.cat = cat;
+        this.userId = userId;
     }
 
     public int getPid() {
@@ -88,5 +91,13 @@ public class Post {
 
     public void setCat(int cat) {
         this.cat = cat;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 }
