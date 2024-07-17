@@ -95,6 +95,46 @@
 
       <!-- navbar bar -->
 
+      <!-- main body -->
+
+      <main>
+        <div class="container">
+            <div class="row mt-4">
+            <!-- first col-->
+            <div class="col-md-4">
+               <!-- categories -->
+
+               <div class="list-group">
+                 <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
+                   All Posts
+                 </a>
+                 <%
+                   PostDao d = new PostDao(ConnectionProvider.getCon());
+                   ArrayList<Category> listCat = d.getAllCategories();
+
+
+                   for(Category cc :listCat){
+
+                 %>
+                 <a href="#" class="list-group-item list-group-item-action"><%= cc.getName() %></a>
+
+                 <%
+                 }
+                 %>
+               </div>
+
+
+            </div
+
+            <!--second col-->
+            <div class="col-md-8">
+
+            </div>
+            </div>
+        </div>
+      </main>
+      <!-- end main body-->
+
       <!-- modal start -->
 
 
@@ -325,8 +365,9 @@
                  data: form,
                  success : function(data,textStatus,jqXHR){
                      console.log(data);
-                    if(data==="done"){
+                    if(data.trim()=="done"){
                        Swal.fire("Post Uploaded...");
+
                     }
                  },
                  error: function(jqXHR,textStatus,errorThrown){
