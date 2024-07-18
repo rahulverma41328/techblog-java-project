@@ -71,7 +71,7 @@ public class PostDao {
         //get all the posts
 
         try {
-            PreparedStatement p = con.prepareStatement("select * from posts");
+            PreparedStatement p = con.prepareStatement("select * from posts order by pid desc");
 
             ResultSet set = p.executeQuery();
 
@@ -83,7 +83,7 @@ public class PostDao {
                 String pCode = set.getString("pcode");
                 String pPic = set.getString("ppic");
                 Timestamp date = set.getTimestamp("Pdate");
-                int catId = set.getInt("catId");
+                int catId = set.getInt("cat");
                 int userId = set.getInt("userId");
 
                 Post post = new Post(pid,pTitle,pContent,pCode,pPic,date,catId,userId);
@@ -101,7 +101,7 @@ public class PostDao {
         List<Post> list =  new ArrayList<>();
 
         try {
-            PreparedStatement p = con.prepareStatement("select * from posts where catId=?");
+            PreparedStatement p = con.prepareStatement("select * from posts where cat=?");
             p.setInt(1,catId);
             ResultSet set = p.executeQuery();
 
@@ -125,4 +125,5 @@ public class PostDao {
         }
         return list;
     }
+
 }

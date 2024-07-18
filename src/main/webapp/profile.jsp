@@ -105,7 +105,7 @@
                <!-- categories -->
 
                <div class="list-group">
-                 <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
+                 <a href="#" onClick="getPosts(0,this)" class="c-link list-group-item list-group-item-action active" aria-current="true">
                    All Posts
                  </a>
                  <%
@@ -116,7 +116,7 @@
                    for(Category cc :listCat){
 
                  %>
-                 <a href="#" class="list-group-item list-group-item-action"><%= cc.getName() %></a>
+                 <a href="#" onClick="getPosts(<%= cc.getCid()%>,this)"class="c-link list-group-item list-group-item-action"><%= cc.getName() %></a>
 
                  <%
                  }
@@ -128,7 +128,14 @@
 
             <!--second col-->
             <div class="col-md-8">
+                 <div class="container text-center" id="loader">
+                    <i class="fa fa-refresh fa-4x fa-spin"></i>
+                    <h3 class="mt-2">Loading....</h3>
+                 </div>
 
+                 <div class="container-fluid" id="post-container">
+
+                 </div>
             </div>
             </div>
         </div>
@@ -381,6 +388,32 @@
              })
           })
        </script>
+
+       <!--loading post -->
+       <script>
+
+       function getPosts(catId,temp){
+           $(".c-link").removeClass('active')
+           $.ajax({
+                     url:"load_posts.jsp",
+                     data:{cid: catId},
+                     success:function(data, textStatus,jqXHR){
+
+                       $("#loader").hide();
+                       $("#post-container").html(data);
+                       $(temp).addClass('active');
+                     }
+            })
+       }
+
+       $(document).ready(function(e){
+           let allPostRef = $('.c-link')[0];
+           getPosts(0,allPostRef);
+       })
+
+       </script>
+
+
 
 
    </body>
