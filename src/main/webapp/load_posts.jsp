@@ -28,8 +28,15 @@
        <div class="card-body">
           <b><%= p.getPtitle() %></b>
           <p><%= p.getPcontent() %></p>
-          <p><%= p.getPcode() %></p>
+         // <p><%= p.getPcode() %></p>
 
+
+       </div>
+
+       <div class="card-footer">
+          <a href="show_page.jsp?post_id=<%= p.getPid()%>" class="btn btn-outline-primary btn-sm">Read More...</a>
+          <a href="#!" class="btn btn-outline-primary btn-sm"><i class="fa fa-thumbs-o-up"></i><span>10</span></a>
+          <a href="#!" class="btn btn-outline-primary btn-sm"><i class="fa fa-commenting-o"></i><span>4</span></a>
        </div>
     </div>
 </div>
